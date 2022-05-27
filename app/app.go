@@ -719,7 +719,7 @@ func (app *App) RegisterTendermintService(clientCtx client.Context) {
 
 func (app *App) RegisterUpgradeHandlers() {
 	planName := "ruderalis"
-	app.UpgradeKeeper.SetUpgradeHandler(planName, func(ctx sdk.Context, plan upgradetypes.Plan, fromVM module.VersionMap) (module.VersionMap, error) {
+	app.UpgradeKeeper.SetUpgradeHandler(planName, func(ctx sdk.Context, plan upgradetypes.Plan, _ module.VersionMap) (module.VersionMap, error) {
 		// delete new modules from the map, for _new_ modules as to not skip InitGenesis
                 delete(fromVM, hello.ModuleName)
 		return app.mm.RunMigrations(ctx, app.configurator, fromVM)
